@@ -25,7 +25,7 @@ class Bender(var status : Status = Status.NORMAL, var question: Question = Quest
                 question.question to status.color
             !isCorrect ->
                 "$msg\n${question.question}" to status.color
-            wrongCount > 2 -> {
+            wrongCount > 1 -> {
                 this.resetBender()
                 "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
             }
