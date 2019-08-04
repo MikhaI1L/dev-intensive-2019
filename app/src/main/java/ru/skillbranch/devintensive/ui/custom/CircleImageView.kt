@@ -16,7 +16,7 @@ class CircleImageView (
 ): ImageView(context, attrs) {
     companion object {
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
-        private const val DEFAULT_BORDER_WIDTH = 2f
+        private const val DEFAULT_BORDER_WIDTH = 2
     }
 
     private var borderColor = DEFAULT_BORDER_COLOR
@@ -27,16 +27,16 @@ class CircleImageView (
 
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
             borderColor = a.getInt(R.styleable.CircleImageView_cv_borderColor, borderColor)
-            borderWidth = a.getFloat(R.styleable.CircleImageView_cv_borderWidth, borderWidth)
+            borderWidth = a.getDimension(R.styleable.CircleImageView_cv_borderWidth, borderWidth.toFloat()).toInt()
             strokePaint.color = borderColor
             strokePaint.style = Paint.Style.STROKE
-            strokePaint.strokeWidth = borderWidth
+            strokePaint.strokeWidth = borderWidth.toFloat()
 
             a.recycle()
 
     }
 
-    fun getBorderWidth() : Float {
+    fun getBorderWidth() : Int {
         return borderWidth
     }
 
@@ -45,7 +45,7 @@ class CircleImageView (
     }
 
     fun setBorderWidth(@Dimension dp: Int) {
-        borderWidth = dp.toFloat()
+        borderWidth = dp
     }
 
     fun setBorderColor(@ColorRes colorId: Int) {
